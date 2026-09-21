@@ -189,9 +189,14 @@ function tahapBaris(r) {
 const labelTahap = (n) => ({ 1: "SKM Tahap 1", 2: "SKM Tahap 2", 3: "SKM Tahap 3", 4: "DKM Tahap 4", 5: "DLKM Tahap 5" }[n] || "Tiada tahap");
 const aktif = (r) => /aktif/i.test(r.status || "");
 
+const reCache = {};
+function awalPerkataan(a) {
+  // padan pada permulaan perkataan sahaja: "urut" tidak padan "kejuruteraan"
+  return reCache[a] ||= new RegExp("(^|[^\\p{L}\\p{N}])" + a.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "u");
+}
 function padan(r, token) {
   const h = (r.program + " " + r.kod_noss).toLowerCase();
-  return token.every((w) => (SINONIM[w] || [w]).some((a) => h.includes(a)));
+  return token.every((w) => (SINONIM[w] || [w]).some((a) => awalPerkataan(a).test(h)));
 }
 
 function cari() {
