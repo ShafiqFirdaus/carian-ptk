@@ -2,7 +2,7 @@ name: Kemas kini data MySPIKE
 
 on:
   schedule:
-    - cron: "0 20 * * 0"   # setiap Isnin, 4:00 pagi waktu Malaysia
+       - cron: "0 20 * * *"   # setiap hari, 4:00 pagi waktu Malaysia
   workflow_dispatch:        # boleh dijalankan secara manual dari tab Actions
 
 permissions:
