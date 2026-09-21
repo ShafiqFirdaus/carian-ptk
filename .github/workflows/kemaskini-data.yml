@@ -1,0 +1,28 @@
+name: Kemas kini data MySPIKE
+
+on:
+  schedule:
+    - cron: "0 20 * * 0"   # setiap Isnin, 4:00 pagi waktu Malaysia
+  workflow_dispatch:        # boleh dijalankan secara manual dari tab Actions
+
+permissions:
+  contents: write
+
+jobs:
+  kemaskini:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r collector/requirements.txt
+      - run: python collector/kumpul_data.py --output data.json --csv data.csv
+      - name: Simpan jika ada perubahan
+        run: |
+          git config user.name "pengumpul-data"
+          git config user.email "actions@users.noreply.github.com"
+          git add data.json data.csv
+          git diff --cached --quiet || git commit -m "Kemas kini data MySPIKE $(date +%F)"
+          git push
