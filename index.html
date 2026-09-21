@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#17392E">
+<title>Carian Kursus PT&amp;K</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --hutan:#17392E; --hutan-2:#21493C; --kunyit:#E3A72F; --kertas:#EEF3F0;
+  --dakwat:#16201B; --kelabu:#5E6B65; --garis:#D3DDD8; --aktif:#2C7A52; --sekat:#8E9893;
+  --putih:#FFFFFF;
+  font-family:"Figtree",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  background:var(--hutan);
+}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--kertas);color:var(--dakwat);font-size:16px;line-height:1.45;min-height:100vh}
+button,input{font:inherit}
+:focus-visible{outline:3px solid var(--kunyit);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+.atas{background:var(--hutan);color:var(--putih);padding:18px 16px 16px}
+.bar{display:flex;align-items:baseline;justify-content:space-between;gap:12px;max-width:720px;margin:0 auto 14px}
+h1{margin:0;font-size:1.15rem;font-weight:800;letter-spacing:-.01em}
+.tarikh{font-size:.8rem;color:#B9CCC3}
+.dalam{max-width:720px;margin:0 auto}
+
+.cari{position:relative}
+.cari input{width:100%;border:0;border-radius:14px;padding:16px 48px 16px 16px;font-size:1.25rem;font-weight:600;
+  background:var(--putih);color:var(--dakwat);box-shadow:inset 0 -3px 0 var(--kunyit)}
+.cari input::placeholder{color:#94A09A;font-weight:500}
+.cari input::-webkit-search-cancel-button{display:none}
+#kosongkan{position:absolute;right:6px;top:50%;transform:translateY(-50%);border:0;background:none;
+  width:40px;height:40px;border-radius:10px;font-size:1.5rem;color:var(--kelabu);cursor:pointer}
+#kosongkan[hidden]{display:none}
+
+.pantas{display:flex;gap:8px;overflow-x:auto;padding:12px 0 2px;scrollbar-width:none}
+.pantas::-webkit-scrollbar{display:none}
+.pantas button{flex:none;border:1px solid #4E7466;background:transparent;color:#E4EEE9;border-radius:999px;
+  padding:7px 13px;font-size:.9rem;font-weight:600;cursor:pointer}
+.pantas button[aria-pressed="true"]{background:var(--kunyit);border-color:var(--kunyit);color:var(--hutan)}
+
+.negeri{display:grid;grid-template-columns:repeat(4,1fr);margin-top:14px;background:var(--hutan-2);border-radius:12px;padding:4px}
+.negeri button{border:0;background:none;color:#CFE0D8;padding:9px 4px;border-radius:9px;font-weight:600;font-size:.92rem;cursor:pointer}
+.negeri button[aria-checked="true"]{background:var(--putih);color:var(--hutan)}
+
+main{max-width:720px;margin:0 auto;padding:14px 16px 24px}
+.ringkas{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-bottom:12px}
+.bil{font-weight:700;margin-right:auto}
+.tafsiran{display:flex;flex-wrap:wrap;gap:6px;width:100%}
+.tafsiran span{background:#DCE7E1;color:var(--hutan);border-radius:6px;padding:2px 8px;font-size:.82rem;font-weight:600}
+.suis{display:flex;align-items:center;gap:6px;font-size:.9rem;color:var(--kelabu)}
+.suis input{width:18px;height:18px;accent-color:var(--aktif)}
+.tindakan{display:flex;gap:8px;width:100%}
+.tindakan button{flex:1;border:1.5px solid var(--hutan);background:var(--putih);color:var(--hutan);border-radius:10px;
+  padding:10px;font-weight:700;cursor:pointer}
+.tindakan button.utama{background:var(--hutan);color:var(--putih)}
+
+.hasil{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.pusat{background:var(--putih);border-radius:12px;padding:14px 14px 12px;border:1px solid var(--garis)}
+.pusat h2{font-size:1.02rem;margin:0;font-weight:700;line-height:1.3}
+.lokasi{font-size:.82rem;color:var(--kelabu);margin:2px 0 10px}
+.prog{list-style:none;margin:0 0 10px;padding:0;display:flex;flex-direction:column;gap:6px}
+.prog li{border-left:4px solid var(--aktif);padding:4px 0 4px 10px}
+.prog li.sekat{border-left-color:var(--sekat);color:var(--kelabu)}
+.prog .nama{font-weight:600;display:block}
+.prog .meta{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:.82rem;color:var(--kelabu)}
+.prog .status{font-weight:700;color:var(--aktif)}
+.prog li.sekat .status{color:#6F7A75}
+.alamat{font-size:.86rem;color:var(--kelabu);margin:0 0 10px}
+.hubung{display:flex;flex-wrap:wrap;gap:6px}
+.hubung a{font-size:.88rem;font-weight:600;color:var(--hutan);text-decoration:none;background:#E5EEE9;border-radius:8px;padding:6px 10px}
+
+.kosong{text-align:center;color:var(--kelabu);padding:32px 12px}
+.kosong strong{display:block;color:var(--dakwat);font-size:1.05rem;margin-bottom:4px}
+.amaran{background:#FFF4DB;border:1px solid #F0D48C;border-radius:10px;padding:10px 12px;font-size:.88rem;margin-bottom:12px}
+
+footer{max-width:720px;margin:0 auto;padding:0 16px 32px;font-size:.82rem;color:var(--kelabu)}
+footer details{margin-top:8px}
+footer summary{cursor:pointer;font-weight:600;color:var(--hutan)}
+footer ul{padding-left:18px;margin:6px 0}
+
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);
+  background:var(--dakwat);color:var(--putih);padding:10px 16px;border-radius:10px;font-weight:600;opacity:0;
+  transition:opacity .2s,transform .2s;pointer-events:none}
+.toast.nampak{opacity:1;transform:translate(-50%,0)}
+@media (prefers-reduced-motion:reduce){.toast{transition:none}}
+</style>
+</head>
+<body>
+<header class="atas">
+  <div class="bar"><h1>Carian Kursus PT&amp;K</h1><span class="tarikh" id="tarikh">Memuatkan data…</span></div>
+  <div class="dalam">
+    <label for="q" class="sr">Nama kursus</label>
+    <div class="cari">
+      <input id="q" type="search" placeholder="Kursus: bekam, urut, postnatal…" autocomplete="off" enterkeyhint="search">
+      <button id="kosongkan" type="button" aria-label="Kosongkan carian" hidden>×</button>
+    </div>
+    <div class="pantas" id="pantas" aria-label="Kursus biasa dicari"></div>
+    <div class="negeri" id="negeri" role="radiogroup" aria-label="Negeri institusi"></div>
+  </div>
+</header>
+
+<main>
+  <div id="amaran"></div>
+  <div class="ringkas" id="ringkas" hidden>
+    <span class="bil" id="bil"></span>
+    <label class="suis"><input type="checkbox" id="aktif"> Aktif sahaja</label>
+    <div class="tafsiran" id="tafsiran"></div>
+    <div class="tindakan">
+      <button type="button" id="salin">Salin jawapan</button>
+      <button type="button" id="kongsi" class="utama">Kongsi</button>
+    </div>
+  </div>
+  <ol class="hasil" id="hasil"></ol>
+  <div id="kosong"></div>
+</main>
+
+<footer>
+  Sumber data: MySPIKE, Jabatan Pembangunan Kemahiran. Status "Sekat Pengambilan" bermaksud pusat tidak menerima pelatih baharu buat masa ini.
+  <details id="noss"><summary>Kod NOSS rujukan</summary><div id="nossIsi"></div></details>
+</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const NEGERI = ["TERENGGANU", "KELANTAN", "PAHANG"];
+const PANTAS = [
+  { label: "Urut Terapeutik", q: "urut" },
+  { label: "Bekam Angin", q: "bekam" },
+  { label: "Mamacare", q: "postnatal" },
+  { label: "Ruqyah", q: "ruqyah" },
+];
+const SINONIM = {
+  postnatal: ["bersalin", "mamacare"], pantang: ["bersalin", "mamacare"],
+  bersalin: ["bersalin", "mamacare"], mamacare: ["mamacare", "bersalin"],
+  urut: ["urut"], massage: ["urut"], urutan: ["urut"],
+  bekam: ["bekam"], cupping: ["bekam"], hijamah: ["bekam"],
+  ruqyah: ["ruqyah"], rukyah: ["ruqyah"], ruqiah: ["ruqyah"], rukiah: ["ruqyah"],
+};
+const ALIAS_NEGERI = { terengganu: "TERENGGANU", ganu: "TERENGGANU", tganu: "TERENGGANU",
+  kelantan: "KELANTAN", kelate: "KELANTAN", pahang: "PAHANG" };
+const HENTI = new Set(("di mana manakah kat boleh nak saya ambil mengambil kursus program sijil untuk dan atau " +
+  "yang dalam ke negeri belajar tempat pusat institusi ada tak apa ini itu skm tahap selepas").split(" "));
+
+let DATA = null, negeriPilih = "SEMUA", hasilSemasa = [];
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const tajuk = (s) => String(s || "").toLowerCase().replace(/\b\p{L}/gu, (c) => c.toUpperCase());
+
+function tafsir(teks) {
+  let t = " " + teks.toLowerCase().replace(/post?\s+natal/g, "postnatal").replace(/[^\p{L}\p{N}\s]/gu, " ") + " ";
+  let tahap = null;
+  const pola = [
+    [/\bdlkm\b|\btahap\s*5\b/, 5],
+    [/\bdkm\s*(?:tahap\s*)?4?\b|\bdiploma\b|\btahap\s*4\b/, 4],
+    [/\bskm\s*(?:tahap\s*)?([123])\b|\btahap\s*([123])\b/, null],
+  ];
+  for (const [re, v] of pola) {
+    const m = t.match(re);
+    if (m) { tahap = v ?? Number(m[1] || m[2]); t = t.replace(re, " "); break; }
+  }
+  const negeri = [];
+  for (const [kata, n] of Object.entries(ALIAS_NEGERI)) {
+    const re = new RegExp("\\b" + kata + "\\b", "g");
+    if (re.test(t)) { if (!negeri.includes(n)) negeri.push(n); t = t.replace(re, " "); }
+  }
+  const token = t.split(/\s+/).filter((w) => w.length > 1 && !HENTI.has(w));
+  return { tahap, negeri, token };
+}
+
+function tahapBaris(r) {
+  const s = (r.tahap || "").toUpperCase();
+  let m = s.match(/TAHAP\s*(\d)/);
+  if (m) return +m[1];
+  if (s.includes("LANJUTAN")) return 5;
+  if (s.includes("DIPLOMA")) return 4;
+  m = (r.kod_noss || "").match(/-(\d):\d{4}/);
+  return m ? +m[1] : 0;
+}
+const labelTahap = (n) => ({ 1: "SKM Tahap 1", 2: "SKM Tahap 2", 3: "SKM Tahap 3", 4: "DKM Tahap 4", 5: "DLKM Tahap 5" }[n] || "Tiada tahap");
+const aktif = (r) => /aktif/i.test(r.status || "");
+
+function padan(r, token) {
+  const h = (r.program + " " + r.kod_noss).toLowerCase();
+  return token.every((w) => (SINONIM[w] || [w]).some((a) => h.includes(a)));
+}
+
+function cari() {
+  if (!DATA) return;
+  const q = $("q").value.trim();
+  $("kosongkan").hidden = !q;
+  const p = tafsir(q);
+  const set = p.negeri.length ? p.negeri : negeriPilih === "SEMUA" ? NEGERI : [negeriPilih];
+
+  let rows = DATA.program.filter((r) => set.includes(r.negeri));
+  rows = p.token.length ? rows.filter((r) => padan(r, p.token)) : rows.filter((r) => r.ptk);
+  if (p.tahap) rows = rows.filter((r) => tahapBaris(r) === p.tahap);
+  if ($("aktif").checked) rows = rows.filter(aktif);
+
+  const kumpulan = new Map();
+  for (const r of rows) {
+    if (!kumpulan.has(r.kod_pusat)) kumpulan.set(r.kod_pusat, { ...r, senarai: [] });
+    kumpulan.get(r.kod_pusat).senarai.push(r);
+  }
+  hasilSemasa = [...kumpulan.values()].sort((a, b) =>
+    (b.senarai.some(aktif) - a.senarai.some(aktif)) ||
+    NEGERI.indexOf(a.negeri) - NEGERI.indexOf(b.negeri) || a.institusi.localeCompare(b.institusi));
+
+  PANTAS.forEach((x, i) => $("pantas").children[i].setAttribute("aria-pressed", String(q.toLowerCase() === x.q)));
+  lukisTafsiran(p, set, q);
+  lukis();
+}
+
+function lukisTafsiran(p, set, q) {
+  const bits = [];
+  if (p.token.length) bits.push("Kursus: " + p.token.join(" "));
+  else bits.push(q ? "Semua kursus" : "Semua kursus PT&K");
+  if (p.tahap) bits.push(labelTahap(p.tahap));
+  bits.push(set.length === 3 ? "Terengganu, Kelantan, Pahang" : set.map(tajuk).join(", "));
+  $("tafsiran").innerHTML = bits.map((b) => `<span>${esc(b)}</span>`).join("");
+}
+
+function telefon(s) {
+  return String(s || "").split(/[\/,;]| dan /i).map((x) => x.trim()).filter((x) => /\d{6,}/.test(x.replace(/\D/g, "")));
+}
+
+function lukis() {
+  const n = hasilSemasa.length;
+  $("ringkas").hidden = n === 0;
+  $("bil").textContent = `${n} pusat bertauliah`;
+  $("hasil").innerHTML = hasilSemasa.map((g) => {
+    const prog = g.senarai.map((r) => `
+      <li class="${aktif(r) ? "" : "sekat"}">
+        <span class="nama">${esc(r.program)}</span>
+        <span class="meta"><span>${esc(labelTahap(tahapBaris(r)))}</span><span>${esc(r.kod_noss)}</span>
+        <span>${esc(r.kategori)}</span><span class="status">${esc(r.status || "Tiada status")}</span></span>
+      </li>`).join("");
+    const tel = telefon(g.telefon).map((t) => `<a href="tel:${esc(t.replace(/[^\d+]/g, ""))}">Telefon ${esc(t)}</a>`).join("");
+    const emel = g.emel ? `<a href="mailto:${esc(g.emel)}">Emel</a>` : "";
+    const peta = g.alamat ? `<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(g.institusi + " " + g.alamat)}" target="_blank" rel="noopener">Peta</a>` : "";
+    const ms = g.idpb ? `<a href="https://www.myspike.my/index.php?r=umum-pb%2Findex-program&idpb=${esc(g.idpb)}" target="_blank" rel="noopener">MySPIKE</a>` : "";
+    return `<li class="pusat">
+      <h2>${esc(g.institusi)}</h2>
+      <p class="lokasi">${esc(tajuk(g.negeri))}, kod pusat ${esc(g.kod_pusat)}</p>
+      <ul class="prog">${prog}</ul>
+      ${g.alamat ? `<p class="alamat">${esc(g.alamat)}</p>` : ""}
+      <div class="hubung">${tel}${emel}${peta}${ms}</div>
+    </li>`;
+  }).join("");
+
+  $("kosong").innerHTML = n ? "" : `<div class="kosong"><strong>Tiada pusat bertauliah ditemui</strong>
+    Cuba nama kursus lain (contoh: bekam, urut, ruqyah), pilih "Semua" negeri, atau matikan "Aktif sahaja".</div>`;
+}
+
+function teksJawapan() {
+  const tarikh = new Date(DATA.dikemaskini).toLocaleDateString("ms-MY", { day: "numeric", month: "long", year: "numeric" });
+  const kepala = `Pusat bertauliah JPK (${$("tafsiran").innerText.replace(/\n/g, ", ")}):`;
+  const badan = hasilSemasa.map((g, i) => {
+    const prog = g.senarai.map((r) => `   - ${r.program} (${labelTahap(tahapBaris(r))}), ${r.status}`).join("\n");
+    const tel = telefon(g.telefon).join(" / ");
+    return `${i + 1}. ${g.institusi}, ${tajuk(g.negeri)}\n${prog}` +
+      (tel ? `\n   Tel: ${tel}` : "") + (g.alamat ? `\n   Alamat: ${g.alamat}` : "");
+  }).join("\n\n");
+  return `${kepala}\n\n${badan}\n\nSumber: MySPIKE (JPK), data pada ${tarikh}. Sila hubungi pusat untuk pengambilan terkini.`;
+}
+
+function toast(m) {
+  const t = $("toast"); t.textContent = m; t.classList.add("nampak");
+  clearTimeout(toast.h); toast.h = setTimeout(() => t.classList.remove("nampak"), 1800);
+}
+async function salin() {
+  try { await navigator.clipboard.writeText(teksJawapan()); toast("Jawapan disalin"); }
+  catch { toast("Tidak dapat menyalin"); }
+}
+async function kongsi() {
+  if (navigator.share) {
+    try { await navigator.share({ text: teksJawapan() }); } catch { /* dibatalkan */ }
+  } else salin();
+}
+
+function lukisNoss() {
+  const n = DATA.noss;
+  const utama = DATA.program_utama.map((p) => {
+    const ok = !n || n.semakan_kod?.[p.kod] !== false;
+    return `<li>${esc(p.nama)}: ${esc(p.kod)}${ok ? "" : " (tidak ditemui dalam Daftar Standard terkini; mungkin telah digantikan)"}</li>`;
+  }).join("");
+  $("nossIsi").innerHTML = `<ul>${utama}</ul>` +
+    (n?.url ? `<a href="${esc(n.url)}" target="_blank" rel="noopener">Buka Daftar Standard NOSS</a>` : "");
+}
+
+function mula() {
+  $("pantas").innerHTML = PANTAS.map((x) => `<button type="button" aria-pressed="false">${esc(x.label)}</button>`).join("");
+  [...$("pantas").children].forEach((b, i) => b.onclick = () => { $("q").value = PANTAS[i].q; cari(); });
+
+  const pilihan = ["SEMUA", ...NEGERI];
+  $("negeri").innerHTML = pilihan.map((n) =>
+    `<button type="button" role="radio" aria-checked="${n === negeriPilih}" data-n="${n}">${n === "SEMUA" ? "Semua" : tajuk(n)}</button>`).join("");
+  $("negeri").onclick = (e) => {
+    const b = e.target.closest("button"); if (!b) return;
+    negeriPilih = b.dataset.n;
+    [...$("negeri").children].forEach((x) => x.setAttribute("aria-checked", String(x === b)));
+    cari();
+  };
+
+  let tunda;
+  $("q").addEventListener("input", () => { clearTimeout(tunda); tunda = setTimeout(cari, 150); });
+  $("q").addEventListener("keydown", (e) => { if (e.key === "Enter") { cari(); e.target.blur(); } });
+  $("kosongkan").onclick = () => { $("q").value = ""; cari(); $("q").focus(); };
+  $("aktif").onchange = cari;
+  $("salin").onclick = salin;
+  $("kongsi").onclick = kongsi;
+}
+
+async function muatData() {
+  try {
+    const r = await fetch("data.json", { cache: "no-cache" });
+    DATA = await r.json();
+    const d = new Date(DATA.dikemaskini);
+    $("tarikh").textContent = "Data " + d.toLocaleDateString("ms-MY", { day: "numeric", month: "short", year: "numeric" });
+    if (DATA.contoh) $("amaran").innerHTML = `<div class="amaran">Ini data contoh. Jalankan pengumpul data untuk mendapatkan senarai sebenar daripada MySPIKE.</div>`;
+    lukisNoss();
+    cari();
+  } catch {
+    $("tarikh").textContent = "";
+    $("kosong").innerHTML = `<div class="kosong"><strong>Data tidak dapat dimuatkan</strong>Semak sambungan internet, kemudian buka semula aplikasi.</div>`;
+  }
+}
+
+mula();
+muatData();
+if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js");
+</script>
+</body>
+</html>

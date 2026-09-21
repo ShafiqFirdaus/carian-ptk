@@ -1,0 +1,19 @@
+{
+ "dikemaskini": "2026-09-21T09:00+08:00",
+ "contoh": true,
+ "sumber": "Data contoh untuk ujian antara muka",
+ "negeri": ["TERENGGANU","KELANTAN","PAHANG"],
+ "program_utama": [
+  {"kod":"MP-082-4:2012","nama":"Urut Terapeutik dan Penjagaan"},
+  {"kod":"MP-110-3:2011","nama":"Terapi Bekam Angin"},
+  {"kod":"Q869-002-4:2016","nama":"Penjagaan Ibu Selepas Bersalin (Mamacare)"},
+  {"kod":"Q869-004-4:2017","nama":"Perawatan Ruqyah"}
+ ],
+ "program": [
+  {"negeri":"TERENGGANU","kod_pusat":"X00001","institusi":"PUSAT CONTOH A","program":"Terapi Bekam Angin","kod_noss":"MP-110-3:2011","kategori":"Program Penuh - Persijilan Mengikut Tahap","tahap":"SKM Tahap 3","status":"Aktif","alamat":"Alamat contoh, Kuala Terengganu","telefon":"09-0000000","emel":"contoh@contoh.my","idpb":"","utama":true,"ptk":true},
+  {"negeri":"TERENGGANU","kod_pusat":"X00001","institusi":"PUSAT CONTOH A","program":"Urut Terapeutik dan Penjagaan","kod_noss":"MP-082-4:2012","kategori":"Program Penuh - Persijilan Mengikut Tahap","tahap":"Diploma Kemahiran Malaysia","status":"Aktif","alamat":"Alamat contoh, Kuala Terengganu","telefon":"09-0000000","emel":"contoh@contoh.my","idpb":"","utama":true,"ptk":true},
+  {"negeri":"KELANTAN","kod_pusat":"X00002","institusi":"PUSAT CONTOH B","program":"Perawatan Ruqyah","kod_noss":"Q869-004-4:2017","kategori":"Program Penuh - Persijilan Mengikut Tahap","tahap":"Diploma Kemahiran Malaysia","status":"Sekat Pengambilan","alamat":"Alamat contoh, Kota Bharu","telefon":"09-1111111 / 019-2222222","emel":"","idpb":"","utama":true,"ptk":true},
+  {"negeri":"PAHANG","kod_pusat":"X00003","institusi":"PUSAT CONTOH C","program":"Penjagaan Ibu Selepas Bersalin (Mamacare)","kod_noss":"Q869-002-4:2016","kategori":"Program Penuh - Persijilan Mengikut Tahap","tahap":"Diploma Kemahiran Malaysia","status":"Aktif","alamat":"Alamat contoh, Kuantan","telefon":"09-3333333","emel":"","idpb":"","utama":true,"ptk":true}
+ ],
+ "noss": null
+}

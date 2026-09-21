@@ -1,0 +1,15 @@
+{
+  "name": "Carian Kursus PT&K",
+  "short_name": "Kursus PT&K",
+  "description": "Cari pusat bertauliah JPK bagi kursus PT&K di Terengganu, Kelantan dan Pahang",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#17392E",
+  "theme_color": "#17392E",
+  "lang": "ms",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
