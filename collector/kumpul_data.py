@@ -43,10 +43,12 @@ PROGRAM_UTAMA = {
 
 # Kata kunci untuk menanda program sebagai berkaitan PT&K
 KATA_PTK = [
-    "BEKAM", "URUT", "RUQYAH", "BERSALIN", "MAMACARE", "REFLEKSOLOGI",
-    "HERBA", "AKUPUNKTUR", "TRADISIONAL", "KOMPLEMENTARI", "HOMEOPATI",
-    "NATUROPATI", "KIROPRAKTIK", "SPA",
+    "BEKAM", "URUT", "URUTAN", "RUQYAH", "BERSALIN", "MAMACARE", "REFLEKSOLOGI",
+    "HERBA", "HERBAL", "AKUPUNKTUR", "PERUBATAN TRADISIONAL", "KOMPLEMENTARI",
+    "HOMEOPATI", "NATUROPATI", "KIROPRAKTIK", "SPA",
 ]
+# Padan perkataan penuh sahaja ("URUT" tidak padan "KEJURUTERAAN" atau "JURUTEKNIK")
+RE_PTK = re.compile(r"\b(?:" + "|".join(re.escape(k) for k in KATA_PTK) + r")\b")
 
 HEADERS = {"User-Agent": "Mozilla/5.0 (Carian Kursus PT&K; pengumpul data mingguan)"}
 MYT = timezone(timedelta(hours=8))
@@ -209,7 +211,7 @@ def baca_noss(url):
     baris_ptk = []
     for b in teks.splitlines():
         b = norm(b)
-        if b and any(k in b.upper() for k in KATA_PTK) and b not in baris_ptk:
+        if b and RE_PTK.search(b.upper()) and b not in baris_ptk:
             baris_ptk.append(b)
     return {"url": url, "semakan_kod": semakan, "baris_ptk": baris_ptk[:200]}
 
@@ -263,7 +265,7 @@ def main():
             "emel": p.get("emel", ""),
             "idpb": p.get("idpb", ""),
             "utama": kod_noss in PROGRAM_UTAMA,
-            "ptk": kod_noss in PROGRAM_UTAMA or any(w in nama_prog.upper() for w in KATA_PTK),
+            "ptk": kod_noss in PROGRAM_UTAMA or bool(RE_PTK.search(nama_prog.upper())),
         })
         program.append(rekod)
 
