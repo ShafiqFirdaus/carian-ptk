@@ -30,6 +30,8 @@ from bs4 import BeautifulSoup
 BASE = "https://www.myspike.my/index.php"
 R_PROGRAM = "umum-pb/index-umum-program"
 R_PUSAT = "umum-pb/index-umum"
+LAMAN_UTAMA = "https://www.myspike.my/"
+# Digunakan hanya jika pautan terkini tidak dapat dikesan di laman utama
 NOSS_PDF_LALAI = "https://www.myspike.my/lampiran/manual/Daftar_Standard_versi_MPKK_Bil_12026.pdf"
 
 NEGERI = ["TERENGGANU", "KELANTAN", "PAHANG"]
@@ -191,6 +193,27 @@ def pisah_kod(teks):
     return (norm(m.group(1)), norm(m.group(2))) if m else (norm(teks), "")
 
 
+def cari_pautan_noss():
+    """Cari pautan 'Daftar NOSS' terkini pada menu laman utama MySPIKE."""
+    from urllib.parse import urljoin
+    try:
+        resp = requests.get(LAMAN_UTAMA, headers=HEADERS, timeout=60)
+        resp.raise_for_status()
+        soup = BeautifulSoup(resp.text, "html.parser")
+        calon = []
+        for a in soup.find_all("a", href=True):
+            teks, href = norm(a.get_text(" ")).upper(), a["href"]
+            if "DAFTAR NOSS" in teks or "DAFTAR_STANDARD" in href.upper():
+                if href.lower().split("?")[0].endswith(".pdf"):
+                    calon.append(urljoin(LAMAN_UTAMA, href))
+        if calon:
+            return calon[0]
+        log("  AMARAN: pautan 'Daftar NOSS' tidak ditemui di laman utama MySPIKE.")
+    except requests.RequestException as e:
+        log(f"  AMARAN: gagal membuka laman utama MySPIKE ({e}).")
+    return None
+
+
 def baca_noss(url):
     """Senarai baris PT&K dalam Daftar Standard dan semakan kod utama."""
     try:
@@ -220,7 +243,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--output", default="data.json")
     ap.add_argument("--csv", help="simpan juga sebagai CSV (cth. untuk AppSheet)")
-    ap.add_argument("--noss-pdf", default=NOSS_PDF_LALAI)
+    ap.add_argument("--noss-pdf", help="paksa pautan PDF tertentu (lalai: kesan sendiri dari MySPIKE)")
     ap.add_argument("--delay", type=float, default=1.0)
     args = ap.parse_args()
 
@@ -275,7 +298,9 @@ def main():
 
     # 3. Daftar Standard NOSS
     log("\n[Daftar Standard NOSS]")
-    noss = baca_noss(args.noss_pdf)
+    url_noss = args.noss_pdf or cari_pautan_noss() or NOSS_PDF_LALAI
+    log(f"  PDF: {url_noss}")
+    noss = baca_noss(url_noss)
     if noss:
         for kod, ada in noss["semakan_kod"].items():
             if not ada:
