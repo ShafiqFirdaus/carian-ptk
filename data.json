@@ -1,5 +1,5 @@
 {
- "dikemaskini": "2026-09-28T06:56+08:00",
+ "dikemaskini": "2026-09-29T08:21+08:00",
  "sumber": "MySPIKE, Jabatan Pembangunan Kemahiran (JPK)",
  "negeri": [
   "TERENGGANU",
@@ -8271,6 +8271,22 @@
    "institusi": "KOLEJ VOKASIONAL BACHOK",
    "program": "OPERASI SENI KULINARI",
    "kod_noss": "I561-005-3:2022",
+   "kategori": "Program Penuh - Persijilan Tahap Tunggal",
+   "tahap": "SKM Tahap 3",
+   "status": "Aktif",
+   "alamat": "PERSIARAN TAN SRI MOHAMAED YAACOB 16300 BACHOK, KELANTAN",
+   "telefon": "09-7783834 / 09",
+   "emel": "kvbachok@gmail.com",
+   "idpb": "1584",
+   "utama": false,
+   "ptk": false
+  },
+  {
+   "negeri": "KELANTAN",
+   "kod_pusat": "K05100",
+   "institusi": "KOLEJ VOKASIONAL BACHOK",
+   "program": "OPERASI TEKNIKAL PAKAIAN WANITA",
+   "kod_noss": "C141-005-3:2021",
    "kategori": "Program Penuh - Persijilan Tahap Tunggal",
    "tahap": "SKM Tahap 3",
    "status": "Aktif",
