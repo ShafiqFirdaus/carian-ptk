@@ -1,5 +1,5 @@
 {
- "dikemaskini": "2026-10-26T06:26+08:00",
+ "dikemaskini": "2026-10-27T07:42+08:00",
  "sumber": "MySPIKE, Jabatan Pembangunan Kemahiran (JPK)",
  "negeri": [
   "TERENGGANU",
@@ -12719,22 +12719,6 @@
    "institusi": "INSTITUT KEMAHIRAN TINGGI BELIA NEGARA TEMERLOH",
    "program": "PERKHIDMATAN PEMBAIKAN – KENDERAAN RINGAN",
    "kod_noss": "G452-002-2:2018",
-   "kategori": "Program Penuh - Persijilan Mengikut Tahap",
-   "tahap": "SKM Tahap 2",
-   "status": "Sekat Pengambilan",
-   "alamat": "BATU 10, KAMPUNG BONGSU LANCHANG PAHANG 28500, TEMERLOH, PAHANG",
-   "telefon": "09-2805550",
-   "emel": "azian.hussain@kbs.gov.my",
-   "idpb": "498",
-   "utama": false,
-   "ptk": false
-  },
-  {
-   "negeri": "PAHANG",
-   "kod_pusat": "K03016",
-   "institusi": "INSTITUT KEMAHIRAN TINGGI BELIA NEGARA TEMERLOH",
-   "program": "PERKHIDMATAN PEMBAIKAN – KENDERAAN RINGAN",
-   "kod_noss": "G452-002-2:2018",
    "kategori": "Program Micro Credential",
    "tahap": "SKM Tahap 2",
    "status": "Aktif",
@@ -12833,7 +12817,7 @@
    "kod_noss": "G452-002-3:2018",
    "kategori": "Program Penuh - Persijilan Mengikut Tahap",
    "tahap": "SKM Tahap 3",
-   "status": "Sekat Pengambilan",
+   "status": "Aktif",
    "alamat": "BATU 10, KAMPUNG BONGSU LANCHANG PAHANG 28500, TEMERLOH, PAHANG",
    "telefon": "09-2805550",
    "emel": "azian.hussain@kbs.gov.my",
