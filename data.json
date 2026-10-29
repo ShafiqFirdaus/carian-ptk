@@ -1,5 +1,5 @@
 {
- "dikemaskini": "2026-10-28T07:43+08:00",
+ "dikemaskini": "2026-10-29T08:01+08:00",
  "sumber": "MySPIKE, Jabatan Pembangunan Kemahiran (JPK)",
  "negeri": [
   "TERENGGANU",
@@ -13762,6 +13762,22 @@
    "kategori": "Program Penuh - Persijilan Tahap Tunggal",
    "tahap": "SKM Tahap 3",
    "status": "Sekat Pengambilan",
+   "alamat": "BANDAR BARU CHENOR 28100 CHENOR PAHANG",
+   "telefon": "092995330",
+   "emel": "cha9001@moe.edu.my",
+   "idpb": "507",
+   "utama": false,
+   "ptk": false
+  },
+  {
+   "negeri": "PAHANG",
+   "kod_pusat": "K05086",
+   "institusi": "KOLEJ VOKASIONAL (PERTANIAN) CHENOR",
+   "program": "OPERASI LADANG POLTRI",
+   "kod_noss": "A014-006-3:2022",
+   "kategori": "Program Penuh - Persijilan Mengikut Tahap",
+   "tahap": "SKM Tahap 3",
+   "status": "Aktif",
    "alamat": "BANDAR BARU CHENOR 28100 CHENOR PAHANG",
    "telefon": "092995330",
    "emel": "cha9001@moe.edu.my",
