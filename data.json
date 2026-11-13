@@ -1,5 +1,5 @@
 {
- "dikemaskini": "2026-11-12T09:54+08:00",
+ "dikemaskini": "2026-11-13T09:01+08:00",
  "sumber": "MySPIKE, Jabatan Pembangunan Kemahiran (JPK)",
  "negeri": [
   "TERENGGANU",
@@ -998,6 +998,22 @@
    "telefon": "09-6097540",
    "emel": "gmsetiu@giatmara.edu.my",
    "idpb": "1175",
+   "utama": false,
+   "ptk": false
+  },
+  {
+   "negeri": "TERENGGANU",
+   "kod_pusat": "K03022",
+   "institusi": "INSTITUT KEMAHIRAN BELIA NEGARA KEMASIK",
+   "program": "DANDANAN RAMBUT",
+   "kod_noss": "S960-008-3:2025",
+   "kategori": "Program Penuh - Persijilan Tahap Tunggal",
+   "tahap": "SKM Tahap 3",
+   "status": "Aktif",
+   "alamat": "KM 19 JALAN KEMAMAN-DUNGUN 24200 KEMAMAN TERENGGANU",
+   "telefon": "09-8664500",
+   "emel": "nur_azlina.kbs@1govuc.goc.my",
+   "idpb": "1184",
    "utama": false,
    "ptk": false
   },
